@@ -7,7 +7,7 @@ export default function AddUserScreen() {
   const [role, setRole] = useState('user');
   const [phone, setPhone] = useState('');
 
-  const BASE_URL = 'http://172.20.10.12:8000';
+  const BASE_URL = 'http://192.168.1.92:8000';
 
   const handleSubmit = () => {
     fetch(`${BASE_URL}/api/users`, {

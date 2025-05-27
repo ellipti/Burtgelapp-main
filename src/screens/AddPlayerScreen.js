@@ -13,7 +13,7 @@ export default function AddPlayerScreen() {
   const [facebook, setFacebook] = useState('');
   const [note, setNote] = useState('');
 
-  const BASE_URL = 'http://172.20.10.12:8000';
+  const BASE_URL = 'http://192.168.1.92:8000';
 
   const handleSubmit = () => {
     if (!name || !phone) {
@@ -63,7 +63,7 @@ export default function AddPlayerScreen() {
         />
         <TextInput
           style={styles.textArea}
-          placeholder="Дүнгийн тайлбар"
+          placeholder="Tайлбар"
           value={note}
           onChangeText={setNote}
           multiline

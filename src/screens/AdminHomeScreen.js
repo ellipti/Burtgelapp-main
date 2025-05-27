@@ -31,7 +31,7 @@ export default function AdminHomeScreen() {
 
   const [players, setPlayers] = useState([]);
 
-  const BASE_URL = 'http://172.20.10.12:8000';
+  const BASE_URL = 'http://192.168.1.92:8000';
 
   const fetchUsers = () => {
     fetch(`${BASE_URL}/api/users/list`, {
