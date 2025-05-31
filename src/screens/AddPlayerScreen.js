@@ -17,7 +17,7 @@ export default function AddPlayerScreen() {
 
   const handleSubmit = () => {
     if (!name || !phone) {
-      Alert.alert('⚠️ Алдаа', 'Нэр болон утас заавал бөглөгдөнө.');
+      Alert.alert('⚠️ Алдаа', 'ID болон утас заавал бөглөгдөнө.');
       return;
     }
     fetch(`${BASE_URL}/api/users`, {
@@ -44,7 +44,7 @@ export default function AddPlayerScreen() {
 
         <TextInput
           style={styles.input}
-          placeholder="Нэр *"
+          placeholder="ID *"
           value={name}
           onChangeText={setName}
         />

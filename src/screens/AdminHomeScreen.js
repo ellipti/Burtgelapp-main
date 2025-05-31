@@ -111,12 +111,12 @@ export default function AdminHomeScreen() {
             .then(res => res.json())
             .then(data => {
               console.log(data);
-              Alert.alert('Амжилттай', 'Хэрэглэгч ustagalaa');
+              Alert.alert('Амжилттай', 'Хэрэглэгч устгалаа');
               fetchUsers();
             })
             .catch(err => {
-              console.error('❌ Хэрэглэгч ustgahad алдаа алдаа:', err.message);
-              Alert.alert('Алдаа', 'Хэрэглэгч ustgahad алдаа гарлаа');
+              console.error('❌ Хэрэглэгч устгахад алдаа алдаа:', err.message);
+              Alert.alert('Алдаа', 'Хэрэглэгч устгахад алдаа гарлаа');
             });
     }
   };
@@ -135,8 +135,8 @@ export default function AdminHomeScreen() {
               fetchUsers();
             })
             .catch(err => {
-              console.error('❌ Хэрэглэгч favourite bolohod алдаа гарлаа:', err.message);
-              Alert.alert('Алдаа', 'Хэрэглэгч favourite bolohod алдаа гарлаа');
+              console.error('❌ Хэрэглэгч favourite болгоход алдаа гарлаа:', err.message);
+              Alert.alert('Алдаа', 'Хэрэглэгч favourite болгоход алдаа гарлаа');
             });
   };
 
@@ -183,12 +183,12 @@ export default function AdminHomeScreen() {
     <View style={styles.modalContent}>
       <Text style={styles.modalTitle}>✏️ Тоглогч засах</Text>
 
-      <Text style={styles.inputLabel}>Нэр</Text>
+      <Text style={styles.inputLabel}>ID</Text>
       <TextInput
         style={styles.input}
         value={editName}
         onChangeText={setEditName}
-        placeholder="Нэр оруулна уу"
+        placeholder="ID оруулна уу"
       />
 
       <Text style={styles.inputLabel}>Утас</Text>
@@ -239,7 +239,7 @@ export default function AdminHomeScreen() {
 
       <TextInput
         style={styles.search}
-        placeholder="Хайх..."
+        placeholder="ID-гаар хайх..."
         value={search}
         onChangeText={setSearch}
       />
@@ -249,7 +249,7 @@ export default function AdminHomeScreen() {
           <Text style={styles.tabText}>📋 Бүх тоглогч</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tab} onPress={() => setShowFavorites(true)}>
-          <Text style={styles.tabText}>❤️ Favorite</Text>
+          <Text style={styles.tabText}>❤️ favourite</Text>
         </TouchableOpacity>
       </View>
 
@@ -278,7 +278,7 @@ export default function AdminHomeScreen() {
             </TouchableOpacity>
             <View style={styles.actions}>
               <TouchableOpacity onPress={() => handleToggleFavorite(item.id)} style={styles.actionBtn}>
-                <Text style={styles.actionText}>{item.favourite ? '🌟 Remove Favorite' : '🌟 Favorite'}</Text>
+                <Text style={styles.actionText}>{item.favourite ? '🌟 Remove favourite' : '🌟 favourite'}</Text>
               </TouchableOpacity>
               {userType === 'admin' && (
                 <TouchableOpacity onPress={() => handleDeleteRequest(item)} style={styles.actionBtnDanger}>
