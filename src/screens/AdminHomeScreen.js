@@ -281,7 +281,7 @@ export default function AdminHomeScreen() {
               logout();
               navigation.replace('Login'); // Uncomment if using navigation
             }}
-            title="Logout"
+            title="Гарах"
             leadingIcon="logout"
           />
         </Menu>
