@@ -5,6 +5,7 @@ import AdminHomeScreen from '../screens/AdminHomeScreen';
 import NormalUserHomeScreen from '../screens/NormalUserHomeScreen';
 import AddUserScreen from '../screens/AddPlayerScreen';
 import UserListScreen from '../screens/UserListScreen';
+import ReportScreen from '../screens/ReportScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function RootNavigator() {
       <Stack.Screen name="NormalUserHome" component={NormalUserHomeScreen} />
       <Stack.Screen name="AddUser" component={AddUserScreen} />
       <Stack.Screen name="UserList" component={UserListScreen} />
+      <Stack.Screen name="Report" component={ReportScreen} />
     </Stack.Navigator>
   );
 }
