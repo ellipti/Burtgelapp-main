@@ -10,27 +10,30 @@ import FavoritePlayersScreen from './src/screens/FavoritePlayersScreen';
 import { AuthProvider } from './src/contexts/AuthContext';
 import { PlayerProvider } from './src/contexts/PlayerContext';
 import RootNavigator from './src/navigation/RootNavigator';
+import { Provider as PaperProvider, Appbar, Menu } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <AuthProvider>
-      <PlayerProvider>
-        <NavigationContainer>
-        
-          <RootNavigator />
-          
+    <PaperProvider>
+      <AuthProvider>
+        <PlayerProvider>
+          <NavigationContainer>
+
+            <RootNavigator />
+
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="AdminHome" component={AdminHomeScreen} />
             <Stack.Screen name="NormalUserHome" component={NormalUserHomeScreen} />
             <Stack.Screen name="AddPlayer" component={AddPlayerScreen} />
             <Stack.Screen name="AllPlayers" component={AllPlayersScreen} />
             <Stack.Screen name="Favorites" component={FavoritePlayersScreen} />
-          
-          
-        </NavigationContainer>
-      </PlayerProvider>
-    </AuthProvider>
+
+
+          </NavigationContainer>
+        </PlayerProvider>
+      </AuthProvider>
+    </PaperProvider>
   );
 }

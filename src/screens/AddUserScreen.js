@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { BASE_URL } from '../config/config';
 
 export default function AddUserScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('user');
   const [phone, setPhone] = useState('');
-
-  const BASE_URL = 'http://192.168.1.92:8000';
 
   const handleSubmit = () => {
     fetch(`${BASE_URL}/api/users`, {

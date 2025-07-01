@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { BASE_URL } from '../config/config';
 
 export default function UserListScreen() {
   const [users, setUsers] = useState([]);
-
-  const BASE_URL = 'http://192.168.1.92:8000';
 
   useEffect(() => {
     fetch(`${BASE_URL}/api/users`, {

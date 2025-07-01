@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { PlayerContext } from '../contexts/PlayerContext';
 import { useNavigation } from '@react-navigation/native';
+import { BASE_URL } from '../config/config';
 
 export default function AddPlayerScreen() {
   const { addPlayer } = useContext(PlayerContext);
@@ -13,17 +14,15 @@ export default function AddPlayerScreen() {
   const [facebook, setFacebook] = useState('');
   const [note, setNote] = useState('');
 
-  const BASE_URL = 'http://192.168.1.92:8000';
-
   const handleSubmit = () => {
     if (!name || !phone) {
       Alert.alert('⚠️ Алдаа', 'ID болон утас заавал бөглөгдөнө.');
       return;
     }
     fetch(`${BASE_URL}/api/users`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, facebook, note })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, facebook, note })
     })
       .then(res => res.json())
       .then(data => {
