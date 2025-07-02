@@ -1,10 +1,13 @@
-import * as React from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { Provider as PaperProvider, Appbar, TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { BASE_URL } from '../config/config';
+import { AuthContext } from '../contexts/AuthContext';
 
 const ExpenseInputScreen = () => {
+    const { user, userType, logout } = useContext(AuthContext);
     const navigation = useNavigation();
     const [rows, setRows] = React.useState([{ id: 1, name: '', amount: '' }]);
 
@@ -32,19 +35,21 @@ const ExpenseInputScreen = () => {
             return;
         }
         const dataToSave = rows.map((row) => ({
-            expenseName: row.name,
-            expenseAmount: row.amount,
+            username: row.name,
+            amount: row.amount,
         }));
         console.log('Хадгалах мэдээлэл:', dataToSave);
-        // Example HTTP request using fetch (uncomment and adjust as needed)
-        // fetch('https://your-api-endpoint.com/save', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(dataToSave),
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => Alert.alert('Амжилт', 'Мэдээлэл хадгалагдлаа'))
-        //   .catch((error) => Alert.alert('Алдаа', 'Мэдээлэл хадгалахад алдаа гарлаа'));
+        fetch(`${BASE_URL}/api/exchange/expense?userId=${user._id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSave),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                navigation.goBack();
+                Alert.alert('Амжилт', 'Мэдээлэл хадгалагдлаа');
+            })
+            .catch((error) => Alert.alert('Алдаа', 'Мэдээлэл хадгалахад алдаа гарлаа'));
     };
 
     return (

@@ -17,10 +17,11 @@ if (Platform.OS === 'android') {
 }
 
 export default function AdminHomeScreen() {
-  const { userType, logout } = useContext(AuthContext);
+  const { user, userType, logout } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const [search, setSearch] = useState('');
+  const [showAll, setShowAll] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
   const [showBlacklist, setShowBlacklist] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -42,7 +43,11 @@ export default function AdminHomeScreen() {
 
   // Example action for menu items
   const handleMenuItemPress = (option) => {
-    navigation.navigate('Report');
+    if (userType === 'admin') {
+      navigation.navigate('AdminReportScreen');
+    } else {
+      navigation.navigate('Report');
+    }
     closeMenu();
   };
 
@@ -184,8 +189,24 @@ export default function AdminHomeScreen() {
     }
   };
 
+  const filterFunc = (p) => {
+    if (showAll) {
+      return true;
+    }
+
+    if (showFavorites) {
+      return p.favourite;
+    }
+
+    if (showBlacklist) {
+      return p.blacklist;
+    }
+
+    return true;
+  }
+
   const filteredPlayers = players
-    .filter(p => (showFavorites ? p.favourite : showBlacklist ? p.blacklist : true))
+    .filter(p => filterFunc(p))
     .filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
@@ -264,7 +285,7 @@ export default function AdminHomeScreen() {
 
       {/* Header */}
       <Appbar.Header style={styles.headerWrapper}>
-        <Appbar.Content title="Админ самбар" />
+        <Appbar.Content title={userType == 'admin' ? 'Админ самбар' : 'Хэрэглэгч самбар'} />
         <Menu
           visible={visible}
           onDismiss={closeMenu}
@@ -273,7 +294,7 @@ export default function AdminHomeScreen() {
         >
           <Menu.Item
             onPress={() => handleMenuItemPress()}
-            title="Мэдээ өгөх"
+            title={userType == 'admin' ? 'Мэдээ харах' : 'Мэдээ өгөх'}
             leadingIcon="cog"
           />
           <Menu.Item
@@ -295,13 +316,25 @@ export default function AdminHomeScreen() {
       />
 
       <View style={styles.tabContainer}>
-        <TouchableOpacity style={styles.tab} onPress={() => setShowFavorites(false)}>
+        <TouchableOpacity style={styles.tab} onPress={() => {
+          setShowAll(true);
+          setShowFavorites(false);
+          setShowBlacklist(false);
+        }}>
           <Text style={styles.tabText}>📋 Бүх тоглогч</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabDark} onPress={() => setShowFavorites(true)}>
+        <TouchableOpacity style={styles.tabDark} onPress={() => {
+          setShowAll(false);
+          setShowFavorites(false);
+          setShowBlacklist(true);
+        }}>
           <Text style={styles.tabDarkText}>Blacklist</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tab} onPress={() => setShowFavorites(true)}>
+        <TouchableOpacity style={styles.tab} onPress={() => {
+          setShowAll(false);
+          setShowFavorites(true);
+          setShowBlacklist(false);
+        }}>
           <Text style={styles.tabText}>❤️ favourite</Text>
         </TouchableOpacity>
       </View>

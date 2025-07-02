@@ -73,14 +73,14 @@ export default function LoanInputScreen() {
 
         try {
             if (editMode) {
-                const res = await fetch(`${BASE_URL}/api/loan/edit/${selectedUser.id}`, {
+                const res = await fetch(`${BASE_URL}/api/loan/edit/${selectedUser._id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ amount: payload.amount }),
                 });
                 if (!res.ok) throw new Error('Failed to update');
             } else {
-                const res = await fetch(`${BASE_URL}/api/load/add`, {
+                const res = await fetch(`${BASE_URL}/api/loan/add`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload),
@@ -120,7 +120,7 @@ export default function LoanInputScreen() {
 
             <FlatList
                 data={loanUsers}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item._id}
                 contentContainerStyle={styles.listContainer}
                 renderItem={({ item }) => (
                     <List.Item
@@ -141,7 +141,7 @@ export default function LoanInputScreen() {
                         {!editMode && (
                             <Dropdown
                                 style={styles.dropdown}
-                                data={allUsers.map(user => ({ label: user.name, value: user.id }))}
+                                data={allUsers.map(user => ({ label: user.name, value: user._id }))}
                                 search
                                 labelField="label"
                                 valueField="value"
@@ -150,7 +150,7 @@ export default function LoanInputScreen() {
                                 value={userDropdownValue}
                                 onChange={item => {
                                     setUserDropdownValue(item.value);
-                                    const selected = allUsers.find(u => u.id === item.value);
+                                    const selected = allUsers.find(u => u._id === item.value);
                                     setSelectedUser(selected);
                                 }}
                             />

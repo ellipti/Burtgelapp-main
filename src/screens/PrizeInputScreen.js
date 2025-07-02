@@ -1,9 +1,12 @@
-import * as React from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { Provider as PaperProvider, Appbar, TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { BASE_URL } from '../config/config';
+import { AuthContext } from '../contexts/AuthContext';
 
 const PrizeInputScreen = () => {
+    const { user, userType, logout } = useContext(AuthContext);
     const navigation = useNavigation();
     const [categories, setCategories] = React.useState({
         Poker: [{ id: 1, username: '', amount: '' }],
@@ -52,15 +55,17 @@ const PrizeInputScreen = () => {
             return;
         }
         console.log('Хадгалах мэдээлэл:', dataToSave);
-        // Example HTTP request using fetch (uncomment and adjust as needed)
-        // fetch('https://your-api-endpoint.com/save', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(dataToSave),
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => Alert.alert('Амжилт', 'Мэдээлэл хадгалагдлаа'))
-        //   .catch((error) => Alert.alert('Алдаа', 'Мэдээлэл хадгалахад алдаа гарлаа'));
+        fetch(`${BASE_URL}/api/exchange/prize?userId=${user._id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSave),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                navigation.goBack();
+                Alert.alert('Амжилт', 'Мэдээлэл хадгалагдлаа');
+            })
+            .catch((error) => Alert.alert('Алдаа', 'Мэдээлэл хадгалахад алдаа гарлаа'));
     };
 
     return (

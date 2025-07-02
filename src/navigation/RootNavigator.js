@@ -10,6 +10,9 @@ import TableInputScreen from '../screens/TableInputScreen';
 import PrizeInputScreen from '../screens/PrizeInputScreen';
 import ExpenseInputScreen from '../screens/ExpenseInputScreen';
 import LoanInputScreen from '../screens/LoanInputScreen';
+import AllGroupedDataScreen from '../screens/AllGroupedDataScreen';
+import AdminReportScreen from '../screens/AdminReportScreen';
+import UserDailyDataScreen from '../screens/UserDailyDataScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +29,9 @@ export default function RootNavigator() {
       <Stack.Screen name="PrizeInputScreen" component={PrizeInputScreen} />
       <Stack.Screen name="ExpenseInputScreen" component={ExpenseInputScreen} />
       <Stack.Screen name="LoanInputScreen" component={LoanInputScreen} />
+      <Stack.Screen name="AllGroupedDataScreen" component={AllGroupedDataScreen} />
+      <Stack.Screen name="AdminReportScreen" component={AdminReportScreen} />
+      <Stack.Screen name="UserDailyDataScreen" component={UserDailyDataScreen} />
     </Stack.Navigator>
   );
 }

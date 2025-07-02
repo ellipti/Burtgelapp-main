@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Provider as PaperProvider, Appbar, Menu, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-const ReportScreen = () => {
+const AdminReportScreen = () => {
     const navigation = useNavigation();
     return (
         <PaperProvider>
@@ -11,38 +11,22 @@ const ReportScreen = () => {
                 <View style={styles.containerHeader}>
                     <Appbar.Header style={styles.appbar}>
                         <Appbar.BackAction color="#000" onPress={() => navigation.goBack()} />
-                        <Appbar.Content title="Мэдээ өгөх" titleStyle={styles.title} />
+                        <Appbar.Content title="Мэдээ харах" titleStyle={styles.title} />
 
                     </Appbar.Header>
                 </View>
                 <View style={styles.container}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => {
-                            navigation.navigate('TableInputScreen');
-                        }}
-                    >
-                        <Text style={styles.buttonText}>Орлого бүртгэх</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate('PrizeInputScreen');
-                        }}
-                    >
-                        <Text style={styles.buttonText}>Шагнал бүртгэх</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => navigation.navigate('ExpenseInputScreen')}
-                    >
-                        <Text style={styles.buttonText}>Зарлага бүртгэх</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
                         onPress={() => navigation.navigate('LoanInputScreen')}
                     >
                         <Text style={styles.buttonText}>Агаар харах засах</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate('AllGroupedDataScreen')}
+                    >
+                        <Text style={styles.buttonText}>Мэдээ харах</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -105,4 +89,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ReportScreen;
+export default AdminReportScreen;
